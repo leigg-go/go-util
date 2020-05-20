@@ -1,4 +1,4 @@
 # go-util
 go utils. e.g. orm/redis...
 
-All first-class dir named starts with `_`, e.g. `_redis`, `_mysql`
+All first-class dir name starts with `_`, e.g. `_redis`, `_config`
