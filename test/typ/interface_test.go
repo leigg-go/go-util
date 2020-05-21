@@ -19,5 +19,4 @@ func TestToSliceInterface(t *testing.T) {
 	for _, d := range testData {
 		assert.Equal(t, _interf.ToSliceInterface(d.before), d.after)
 	}
-
 }
