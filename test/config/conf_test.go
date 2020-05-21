@@ -35,8 +35,6 @@ func TestJsonLoaderAndReadCmdArgs(t *testing.T) {
 
 	// 3. set filename
 	loader.SetFileName("t") // no suffix, default `config`
-
-	loader.SetConfFolderName("config") // default `staticfile`
 	loader.SetDeployDir(*path)
 
 	// so it will load config file from `$confCmdFlag/config/t.json` now.
@@ -79,7 +77,6 @@ func TestYamlLoader(t *testing.T) {
 	_ = os.Setenv(_config.DefGoDeployDirEnv, "E:/workspace/go/lei_pj/go-util/test/")
 
 	loader := _config.NewLoader("yaml")
-	loader.SetConfFolderName("config")
 	loader.SetFileName("t")
 
 	// so it will load config file from `$DefGoDeployDirEnv/config/t.yaml` now.
@@ -117,7 +114,6 @@ type tomlConf struct {
 func TestTomlLoader(t *testing.T) {
 	c := new(tomlConf)
 	loader := _config.NewLoader("toml")
-	loader.SetConfFolderName("config")
 	loader.SetFileName("t")
 	loader.SetDeployDir("E:/workspace/go/lei_pj/go-util/test/")
 

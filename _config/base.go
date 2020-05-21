@@ -16,7 +16,7 @@ import (
 const (
 	// concat with loader suffix, like config.json/config.yaml
 	DefFileName       = "config"
-	DefConfFolderName = "staticfile"
+	DefConfFolderName = "config"
 	DefConfCmdFlag    = "conf"
 	// config path by env, parse `$GO_DEPLOY_DIR/config/`
 	DefGoDeployDirEnv = "GO_DEPLOY_DIR"
@@ -79,16 +79,17 @@ func (s *share) LoadPath(suffix string) {
 		_util.PanicIfErr(err, nil, "_config: %v")
 		s.path = absP
 	}()
-	// called SetDeployDir()
-	if s.path != "" {
-		return
-	}
 
 	// set default
 	_util.If(s.fName == "", func() { s.fName = DefFileName })
 	_util.If(s.folderName == "", func() { s.folderName = DefConfFolderName })
 	_util.If(s.cmdFlag == "", func() { s.cmdFlag = DefConfCmdFlag })
 	_util.If(s.envName == "", func() { s.envName = DefGoDeployDirEnv })
+
+	// called SetDeployDir()
+	if s.path != "" {
+		return
+	}
 
 	already := false
 	flag.Visit(func(i *flag.Flag) {
