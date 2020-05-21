@@ -5,6 +5,7 @@ import (
 	"github.com/bmizerany/assert"
 	"github.com/leigg-go/go-util/_config"
 	"log"
+	"os"
 	"testing"
 )
 
@@ -19,10 +20,30 @@ type myConf struct {
 	}
 }
 
+// Test jsonLoader and cmd-line parsing
 func TestJsonLoaderAndReadCmdArgs(t *testing.T) {
-	c := new(myConf)
-	_config.NewLoader("json").MustLoadFromFile("t.json", c)
 
+	c := new(myConf)
+	// 1. cmd-line args are first, set cmd flag to test
+	// but this step is not a required, because pkg did it for help us,
+	// just for testing.
+	path := flag.String(_config.DefConfCmdFlag, "", "")
+	_ = flag.Set(_config.DefConfCmdFlag, "E:/workspace/go/lei_pj/go-util/test/")
+
+	// 2. get loader
+	loader := _config.NewLoader("json")
+
+	// 3. set filename
+	loader.SetFileName("t") // no suffix, default `config`
+
+	loader.SetConfFolderName("config") // default `staticfile`
+	loader.SetDeployDir(*path)
+
+	// so it will load config file from `$confCmdFlag/config/t.json` now.
+
+	loader.MustLoad(c)
+
+	// do other args replace from cmd-line args
 	host := flag.String("Host", "", "usage")
 	port := flag.Int("port", 0, "usage")
 
@@ -50,9 +71,20 @@ func TestJsonLoaderAndReadCmdArgs(t *testing.T) {
 	assert.Equal(t, should, *c)
 }
 
+// Test YamlLoader and env parsing
 func TestYamlLoader(t *testing.T) {
 	c := new(myConf)
-	_config.NewLoader("yaml").MustLoadFromFile("t.yaml", c)
+
+	// set env manually.
+	_ = os.Setenv(_config.DefGoDeployDirEnv, "E:/workspace/go/lei_pj/go-util/test/")
+
+	loader := _config.NewLoader("yaml")
+	loader.SetConfFolderName("config")
+	loader.SetFileName("t")
+
+	// so it will load config file from `$DefGoDeployDirEnv/config/t.yaml` now.
+	loader.MustLoad(c)
+
 	should := myConf{
 		Host: "1.1.1.1", Port: 666, Labels: []string{"a", "b", "c"}, Nested: struct {
 			Host   string
@@ -84,7 +116,14 @@ type tomlConf struct {
 
 func TestTomlLoader(t *testing.T) {
 	c := new(tomlConf)
-	_config.NewLoader("toml").MustLoadFromFile("t.toml", c)
+	loader := _config.NewLoader("toml")
+	loader.SetConfFolderName("config")
+	loader.SetFileName("t")
+	loader.SetDeployDir("E:/workspace/go/lei_pj/go-util/test/")
+
+	// so it will load config file from `E:/workspace/go/lei_pj/go-util/test//config/t.toml` now.
+	loader.MustLoad(c)
+
 	should := tomlConf{
 		Title: "toml example",
 		Mysql: struct {

@@ -2,6 +2,7 @@
   <dictionary name="Administrator">
     <words>
       <w>leigg</w>
+      <w>staticfile</w>
       <w>struct</w>
       <w>svrs</w>
     </words>

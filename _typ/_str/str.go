@@ -1,7 +1,7 @@
 package _str
 
-func StrEach(s []string, fn func(seq int, elem string)) {
-	for seq, elem := range s {
-		fn(seq, elem)
+func Each(s []string, fn func(i int, elem string)) {
+	for i, elem := range s {
+		fn(i, elem)
 	}
 }

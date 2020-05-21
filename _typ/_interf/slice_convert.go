@@ -34,7 +34,7 @@ func ToSliceInterface(slice interface{}) []interface{} {
 			ret = append(ret, elem)
 		})
 	case []string:
-		_str.StrEach(slice.([]string), func(seq int, elem string) {
+		_str.Each(slice.([]string), func(seq int, elem string) {
 			ret = append(ret, elem)
 		})
 	case []float64:
