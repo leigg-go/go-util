@@ -19,7 +19,7 @@ loader := _config.NewLoader("json")
 os.Setenv(_config.DefGoDeployDirEnv, "/deploy_dir")
 
 // load config from `/deploy_dir/staticfile/config.json`
-// staticfile is folder name, change folder name by loader.SetConfFolderName("config") = "config"
+// staticfile is folder name, change folder name by loader.SetConfFolderName("YOUR_FOLDER_NAME")
 loader.MustLoad(c)
 
 fmt.Printf("%+v", myConf)
