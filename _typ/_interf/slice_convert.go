@@ -42,7 +42,7 @@ func ToSliceInterface(slice interface{}) []interface{} {
 			ret = append(ret, elem)
 		})
 	case []error:
-		_err.ErrEach(slice.([]error), func(seq int, elem error) {
+		_err.Each(slice.([]error), func(seq int, elem error) {
 			ret = append(ret, elem)
 		})
 	default:

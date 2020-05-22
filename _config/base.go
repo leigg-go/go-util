@@ -35,6 +35,7 @@ type ConfLoader interface {
 
 	MustLoad(conf interface{})
 	GetDeployDir() string
+	GetConfPath() string
 }
 
 // ReadCmdArgs use fn to iterate command-line flags that have been set.
@@ -80,6 +81,10 @@ func (s *share) SetDeployDirEnvName(name string) {
 
 func (s *share) GetDeployDir() string {
 	return s.deployDir
+}
+
+func (s *share) GetConfPath() string {
+	return s.confPath
 }
 
 // LoadPath from cmd-line args, env in order.

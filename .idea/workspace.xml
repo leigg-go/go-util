@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d7c9153-ec7d-4ae4-b39e-32b0797b39ce" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/_typ/_str/string.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_config/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/_config/base.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_util/comm_util.go" beforeDir="false" afterPath="$PROJECT_DIR$/_util/comm_util.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config/t.json" beforeDir="false" afterPath="$PROJECT_DIR$/test/staticfile/config/t.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config/t.toml" beforeDir="false" afterPath="$PROJECT_DIR$/test/staticfile/config/t.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config/t.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/test/staticfile/config/t.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_config/base.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="80" column="28" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="28" />
+            <state relative-caret-position="460">
+              <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -42,17 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/config/conf_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
+            <state relative-caret-position="-782">
               <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_typ/_str/string.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
@@ -78,8 +64,9 @@
       <list>
         <option value="$PROJECT_DIR$/_redis/registry.go" />
         <option value="$PROJECT_DIR$/_util/comm_util.go" />
-        <option value="$PROJECT_DIR$/_config/base.go" />
         <option value="$PROJECT_DIR$/_typ/_str/string.go" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/_config/base.go" />
       </list>
     </option>
   </component>
@@ -141,6 +128,12 @@
               <item name="go-util" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
+              <item name="go-util" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="staticfile" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -177,7 +170,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.conf_test.go">
+  <component name="RunManager" selected="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config">
+    <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-util" />
+      <working_directory value="$PROJECT_DIR$/test/config" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/leigg-go/go-util/test/config" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestJsonLoaderAndReadCmdArgs$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/staticfile/config" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-util" />
       <working_directory value="$PROJECT_DIR$/test/staticfile/config" />
@@ -202,9 +206,11 @@
     <list>
       <item itemvalue="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/staticfile/config" />
       <item itemvalue="Go Test.conf_test.go" />
+      <item itemvalue="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" />
         <item itemvalue="Go Test.conf_test.go" />
         <item itemvalue="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/staticfile/config" />
       </list>
@@ -217,17 +223,21 @@
     <history-entry file="conf_test_go - 2020.05.22 at 10h 56m 24s.xml">
       <configuration name="conf_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_config - 2020.05.22 at 18h 26m 06s.xml">
+      <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12899786" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12899786" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Messages" sideWeight="0.49946696" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5740938" visible="true" weight="0.21149674" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5740938" weight="0.24403471" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -236,7 +246,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4989339" weight="0.2527115" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.42590618" side_tool="true" weight="0.21149674" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50053304" side_tool="true" weight="0.329718" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -283,24 +293,34 @@
     <entry file="file://$PROJECT_DIR$/test/staticfile/config/t.toml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/_config/base.go">
+    <entry file="file://$PROJECT_DIR$/_typ/_str/string.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="80" column="28" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="28" />
+        <state relative-caret-position="368">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="188">
+            <caret line="10" selection-start-line="10" selection-end-line="10" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/config/conf_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
+        <state relative-caret-position="-782">
           <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_typ/_str/string.go">
+    <entry file="file://$PROJECT_DIR$/_config/base.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="460">
+          <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
         </state>
       </provider>
     </entry>
