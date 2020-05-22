@@ -1,7 +1,6 @@
 package _util
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"os"
@@ -20,8 +19,9 @@ import (
 对于第三种情况就很简单，信号监听和资源清理都在OnProcessExit内部完成
 */
 // 监听[进程退出信号]的协程，完成资源释放工作
-func OnProcessExit(doWhenClose func(), mainProcessCtx context.Context) <-chan struct{} {
+func OnProcessExit(doWhenClose func()) (chan<- struct{}, <-chan struct{}) {
 	done := make(chan struct{})
+	shouldExit := make(chan struct{})
 	go func() {
 		// 监听进程外部信号
 		sysSignalChan := make(chan os.Signal)
@@ -33,8 +33,8 @@ func OnProcessExit(doWhenClose func(), mainProcessCtx context.Context) <-chan st
 		)
 		var onSignal bool
 		select {
-		case <-mainProcessCtx.Done():
-			log.Println("OnProcessExit mainProcessCtx.Done!")
+		case <-shouldExit:
+			log.Println("OnProcessExit read chan-shouldExit!")
 		case s := <-sysSignalChan:
 			onSignal = true
 			log.Printf("OnCloseSignal: %s\n", s)
@@ -51,7 +51,7 @@ func OnProcessExit(doWhenClose func(), mainProcessCtx context.Context) <-chan st
 		}
 		// 不是signal不要退出（否则看不到panic信息），外面调用了ctx.Cancel()，那必须在外面发生panic
 	}()
-	return done
+	return shouldExit, done
 }
 
 func InCollection(elem interface{}, coll []interface{}) bool {

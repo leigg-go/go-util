@@ -14,24 +14,27 @@ import (
 )
 
 const (
-	// concat with loader suffix, like config.json/config.yaml
-	DefFileName       = "config"
-	DefConfFolderName = "config"
-	DefConfCmdFlag    = "conf"
-	// config path by env, parse `$GO_DEPLOY_DIR/config/`
+	DefFileName             = "config"
+	DefStaticFileFolderName = "staticfile"
+	DefConfFolderName       = "config"
+	DefConfCmdFlag          = "conf"
+	// config confPath by env, parse `$GO_DEPLOY_DIR/config/`
 	DefGoDeployDirEnv = "GO_DEPLOY_DIR"
 )
 
 // ConfLoader api
 type ConfLoader interface {
 	// File name without suffix, e.g. [config].json, should not contain `.json`
-	SetFileName(name string)
-	SetConfFolderName(name string)
-	SetDeployDir(path string)
+	SetDeployDir(dir string)
 	SetDeployDirCmdFlag(name string)
 	SetDeployDirEnvName(name string)
+
+	SetFileName(name string)
+	SetStaticFileFolderName(name string)
+	SetConfFolderName(name string)
+
 	MustLoad(conf interface{})
-	GetPath() string
+	GetDeployDir() string
 }
 
 // ReadCmdArgs use fn to iterate command-line flags that have been set.
@@ -41,16 +44,22 @@ func ReadCmdArgs(fn func(*flag.Flag)) {
 }
 
 type share struct {
-	fName      string
-	folderName string
-	path       string
-	cmdFlag    string
-	envName    string
+	deployDir            string
+	fName                string
+	staticfileFolderName string
+	confFolderName       string
+	confPath             string
+	cmdFlag              string
+	envName              string
 }
 
 // prior
-func (s *share) SetDeployDir(path string) {
-	s.path = path
+func (s *share) SetDeployDir(dir string) {
+	s.deployDir = dir
+}
+
+func (s *share) SetStaticFileFolderName(name string) {
+	s.staticfileFolderName = name
 }
 
 func (s *share) SetFileName(name string) {
@@ -58,7 +67,7 @@ func (s *share) SetFileName(name string) {
 }
 
 func (s *share) SetConfFolderName(name string) {
-	s.folderName = name
+	s.confFolderName = name
 }
 
 func (s *share) SetDeployDirCmdFlag(name string) {
@@ -69,30 +78,32 @@ func (s *share) SetDeployDirEnvName(name string) {
 	s.envName = name
 }
 
-func (s *share) GetPath() string {
-	return s.path
+func (s *share) GetDeployDir() string {
+	return s.deployDir
 }
 
 // LoadPath from cmd-line args, env in order.
 func (s *share) LoadPath(suffix string) {
 	defer func() {
-		if s.path == "" {
-			panic(fmt.Sprintf("_config: no path"))
+		if s.deployDir == "" {
+			panic(fmt.Sprintf("_config: no deployDir"))
 		}
-		s.path = filepath.Join(s.path, s.folderName, s.fName+suffix)
-		absP, err := filepath.Abs(s.path)
+		// Rule of confPath concat
+		s.confPath = filepath.Join(s.deployDir, s.staticfileFolderName, s.confFolderName, s.fName+suffix)
+		absP, err := filepath.Abs(s.confPath)
 		_util.PanicIfErr(err, nil, "_config: %v")
-		s.path = absP
+		s.confPath = absP
 	}()
 
 	// set default
 	_util.If(s.fName == "", func() { s.fName = DefFileName })
-	_util.If(s.folderName == "", func() { s.folderName = DefConfFolderName })
+	_util.If(s.staticfileFolderName == "", func() { s.staticfileFolderName = DefStaticFileFolderName })
+	_util.If(s.confFolderName == "", func() { s.confFolderName = DefConfFolderName })
 	_util.If(s.cmdFlag == "", func() { s.cmdFlag = DefConfCmdFlag })
 	_util.If(s.envName == "", func() { s.envName = DefGoDeployDirEnv })
 
 	// called SetDeployDir()
-	if s.path != "" {
+	if s.deployDir != "" {
 		return
 	}
 
@@ -103,15 +114,15 @@ func (s *share) LoadPath(suffix string) {
 		}
 	})
 	if !already {
-		flag.StringVar(&s.path, s.cmdFlag, "", "[set by _config]: config path")
+		flag.StringVar(&s.deployDir, s.cmdFlag, "", "[set by _config]: deploy dir")
 	}
 
 	flag.Parse()
 
-	if s.path != "" {
+	if s.deployDir != "" {
 		return
 	}
-	s.path = os.Getenv(s.envName)
+	s.deployDir = os.Getenv(s.envName)
 }
 
 type JsonLoader struct {
@@ -121,7 +132,7 @@ type JsonLoader struct {
 func (l *JsonLoader) MustLoad(conf interface{}) {
 	l.LoadPath(".json")
 
-	b, err := ioutil.ReadFile(l.path)
+	b, err := ioutil.ReadFile(l.confPath)
 	_util.PanicIfErr(err, nil, "_config: %v")
 	_util.PanicIfErr(json.Unmarshal(b, conf), nil)
 }
@@ -133,7 +144,7 @@ type YamlLoader struct {
 func (l *YamlLoader) MustLoad(conf interface{}) {
 	l.LoadPath(".yaml")
 
-	b, err := ioutil.ReadFile(l.path)
+	b, err := ioutil.ReadFile(l.confPath)
 	_util.PanicIfErr(err, nil, "_config: %v")
 	_util.PanicIfErr(yaml.Unmarshal(b, conf), nil)
 }
@@ -145,7 +156,7 @@ type TomlLoader struct {
 func (l *TomlLoader) MustLoad(conf interface{}) {
 	l.LoadPath(".toml")
 
-	b, err := ioutil.ReadFile(l.path)
+	b, err := ioutil.ReadFile(l.confPath)
 	_util.PanicIfErr(err, nil, "_config: %v")
 	_util.PanicIfErr(toml.Unmarshal(b, conf), nil)
 }
