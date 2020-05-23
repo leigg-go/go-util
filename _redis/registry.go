@@ -29,11 +29,14 @@ func newCli(opts *redis.Options) *redis.Client {
 	cli := redis.NewClient(opts)
 	_, err := cli.Ping().Result()
 	if err != nil {
-		panic(err)
+		panic(fmt.Sprintf("_redis: %v", err))
 	}
 	return cli
 }
 
 func Close() error {
+	if DefClient == nil {
+		return nil
+	}
 	return DefClient.Close()
 }

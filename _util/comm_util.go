@@ -96,3 +96,23 @@ func If(condition bool, then func(), _else ...func()) {
 		}
 	}
 }
+
+type SvcWithClose interface {
+	Close() error
+}
+
+func CloseSvcSafely(manySvc []SvcWithClose) []error {
+	var (
+		errs []error
+		err  error
+	)
+	for _, i := range manySvc {
+		if i == nil {
+			continue
+		}
+		if err = i.Close(); err != nil {
+			errs = append(errs, err)
+		}
+	}
+	return errs
+}
