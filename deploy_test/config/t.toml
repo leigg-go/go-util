@@ -1,0 +1,18 @@
+TITLE="toml example" # comment is supported
+
+[Mysql]
+host= "1.1.1.1" # str have to be quoted by `"`
+port=666
+labels=["a","b","c"]
+    [Mysql.NESTED] # nested struct
+    host= "1.1.1.1"
+    port=777
+    labels=["a","b","c"]
+
+[RedisSvrs]
+    [RedisSvrs.svr1] # map
+        host= "3.3.3.3"
+        port=888
+    [RedisSvrs.svr2]
+            host= "3.3.3.4"
+            port=888

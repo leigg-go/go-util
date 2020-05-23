@@ -1,0 +1,7 @@
+host: 1.1.1.1
+port: 666
+labels: [a,b,c]
+nested:
+    host: "2.2.2.2" # Double quotes are optional, but those character are required that contain space, like `Hai lun`.
+    port: 6668
+    labels: [c,b,a]

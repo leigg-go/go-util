@@ -14,11 +14,10 @@ import (
 )
 
 const (
-	DefFileName             = "config"
-	DefStaticFileFolderName = "staticfile"
-	DefConfFolderName       = "config"
-	DefConfCmdFlag          = "conf"
-	// config confPath by env, parse `$GO_DEPLOY_DIR/config/`
+	DefConfFileName   = "config"
+	DefConfFolderName = "config"
+	DefDeployCmdFlag  = "deploy"
+	// config confPath by env, parse `$GO_DEPLOY_DIR/$ConfFolderName/$ConfFileName+(.suffix)`
 	DefGoDeployDirEnv = "GO_DEPLOY_DIR"
 )
 
@@ -30,7 +29,6 @@ type ConfLoader interface {
 	SetDeployDirEnvName(name string)
 
 	SetFileName(name string)
-	SetStaticFileFolderName(name string)
 	SetConfFolderName(name string)
 
 	MustLoad(conf interface{})
@@ -45,22 +43,17 @@ func ReadCmdArgs(fn func(*flag.Flag)) {
 }
 
 type share struct {
-	deployDir            string
-	fName                string
-	staticfileFolderName string
-	confFolderName       string
-	confPath             string
-	cmdFlag              string
-	envName              string
+	deployDir      string
+	fName          string
+	confFolderName string
+	confPath       string
+	cmdFlag        string
+	envName        string
 }
 
 // prior
 func (s *share) SetDeployDir(dir string) {
 	s.deployDir = dir
-}
-
-func (s *share) SetStaticFileFolderName(name string) {
-	s.staticfileFolderName = name
 }
 
 func (s *share) SetFileName(name string) {
@@ -94,17 +87,16 @@ func (s *share) LoadPath(suffix string) {
 			panic(fmt.Sprintf("_config: no deployDir"))
 		}
 		// Rule of confPath concat
-		s.confPath = filepath.Join(s.deployDir, s.staticfileFolderName, s.confFolderName, s.fName+suffix)
+		s.confPath = filepath.Join(s.deployDir, s.confFolderName, s.fName+suffix)
 		absP, err := filepath.Abs(s.confPath)
 		_util.PanicIfErr(err, nil, "_config: %v")
 		s.confPath = absP
 	}()
 
 	// set default
-	_util.If(s.fName == "", func() { s.fName = DefFileName })
-	_util.If(s.staticfileFolderName == "", func() { s.staticfileFolderName = DefStaticFileFolderName })
+	_util.If(s.fName == "", func() { s.fName = DefConfFileName })
 	_util.If(s.confFolderName == "", func() { s.confFolderName = DefConfFolderName })
-	_util.If(s.cmdFlag == "", func() { s.cmdFlag = DefConfCmdFlag })
+	_util.If(s.cmdFlag == "", func() { s.cmdFlag = DefDeployCmdFlag })
 	_util.If(s.envName == "", func() { s.envName = DefGoDeployDirEnv })
 
 	// called SetDeployDir()

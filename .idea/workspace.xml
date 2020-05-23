@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d7c9153-ec7d-4ae4-b39e-32b0797b39ce" name="Default Changelist" comment="">
+    <list default="true" id="529ca211-4c9b-4778-a2a2-decd4b605f67" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/deploy_test/config/t.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy_test/config/t.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy_test/config/t.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_config/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/_config/base.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/config/conf_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/config/conf_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/staticfile/config/t.json" beforeDir="false" afterPath="$PROJECT_DIR$/deploy/config/t.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/staticfile/config/t.toml" beforeDir="false" afterPath="$PROJECT_DIR$/deploy/config/t.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/staticfile/config/t.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deploy/config/t.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,32 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_redis/registry.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="34" column="1" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
-              <folding>
-                <element signature="e#16#107#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_config/base.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/config/conf_test.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-782">
-              <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
+            <state relative-caret-position="85">
+              <caret line="16" column="19" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -66,13 +52,14 @@
         <option value="$PROJECT_DIR$/_util/comm_util.go" />
         <option value="$PROJECT_DIR$/_typ/_str/string.go" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/test/config/conf_test.go" />
         <option value="$PROJECT_DIR$/_config/base.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="96" />
-    <option name="y" value="56" />
+    <option name="x" value="423" />
+    <option name="y" value="33" />
     <option name="width" value="1920" />
     <option name="height" value="1047" />
   </component>
@@ -100,39 +87,13 @@
             <path>
               <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
               <item name="go-util" type="462c0819:PsiDirectoryNode" />
-              <item name="_os" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
-              <item name="go-util" type="462c0819:PsiDirectoryNode" />
-              <item name="_redis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
-              <item name="go-util" type="462c0819:PsiDirectoryNode" />
-              <item name="_typ" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
-              <item name="go-util" type="462c0819:PsiDirectoryNode" />
-              <item name="_typ" type="462c0819:PsiDirectoryNode" />
-              <item name="_str" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
-              <item name="go-util" type="462c0819:PsiDirectoryNode" />
-              <item name="_util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
-              <item name="go-util" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
               <item name="go-util" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="staticfile" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -148,11 +109,16 @@
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/deploy_test" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\LEI\go\gitee\branch\go-util\deploy_test" />
+      <recent name="C:\Users\LEI\go\gitee\branch\go-util" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\LEI\go\gitee\branch\go-util\deploy" />
       <recent name="E:\workspace\go\lei_pj\go-util\test\staticfile\config" />
       <recent name="E:\workspace\go\lei_pj\go-util\test\staticfile" />
       <recent name="E:\workspace\go\lei_pj\go-util\test" />
@@ -193,6 +159,17 @@
       <pattern value="^TestJsonLoaderAndReadCmdArgs$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestTomlLoader in github.com/leigg-go/go-util/test/config" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-util" />
+      <working_directory value="$PROJECT_DIR$/test/config" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/leigg-go/go-util/test/config" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestTomlLoader$" />
+      <method v="2" />
+    </configuration>
     <configuration name="conf_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-util" />
       <working_directory value="$PROJECT_DIR$/test/config" />
@@ -204,40 +181,62 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" />
       <item itemvalue="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/staticfile/config" />
       <item itemvalue="Go Test.conf_test.go" />
-      <item itemvalue="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" />
+      <item itemvalue="Go Test.TestTomlLoader in github.com/leigg-go/go-util/test/config" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" />
+        <item itemvalue="Go Test.TestTomlLoader in github.com/leigg-go/go-util/test/config" />
         <item itemvalue="Go Test.conf_test.go" />
         <item itemvalue="Go Test.TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/staticfile/config" />
       </list>
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_staticfile_config - 2020.05.22 at 10h 47m 11s.xml">
-      <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/staticfile/config" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="conf_test_go - 2020.05.22 at 10h 56m 24s.xml">
       <configuration name="conf_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
     <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_config - 2020.05.22 at 18h 26m 06s.xml">
       <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="TestTomlLoader_in_github_com_leigg-go_go-util_test_config - 2020.05.23 at 08h 57m 10s.xml">
+      <configuration name="TestTomlLoader in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_config - 2020.05.23 at 08h 58m 08s.xml">
+      <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_config - 2020.05.23 at 09h 01m 03s.xml">
+      <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_config - 2020.05.23 at 09h 01m 19s.xml">
+      <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_config - 2020.05.23 at 09h 01m 41s.xml">
+      <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_config - 2020.05.23 at 09h 02m 37s.xml">
+      <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_config - 2020.05.23 at 09h 03m 00s.xml">
+      <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestJsonLoaderAndReadCmdArgs_in_github_com_leigg-go_go-util_test_config - 2020.05.23 at 09h 10m 54s.xml">
+      <configuration name="TestJsonLoaderAndReadCmdArgs in github.com/leigg-go/go-util/test/config" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12899786" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25383994" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" sideWeight="0.49946696" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5740938" weight="0.24403471" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5740938" weight="0.46011132" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -245,8 +244,9 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4989339" weight="0.2527115" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4989339" weight="0.24860853" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50053304" side_tool="true" weight="0.329718" />
+      <window_info active="true" anchor="bottom" id="Messages" order="12" sideWeight="0.49946696" visible="true" weight="0.329718" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -284,15 +284,6 @@
     <entry file="file://$PROJECT_DIR$/_typ/_str/strings.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/staticfile/config/t.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/staticfile/config/t.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/staticfile/config/t.toml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/_typ/_str/string.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
@@ -310,17 +301,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/deploy/config/t.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deploy/config/t.toml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deploy/config/t.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/config/conf_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-782">
-          <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
+        <state relative-caret-position="118">
+          <caret line="125" column="33" selection-start-line="125" selection-start-column="33" selection-end-line="125" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_config/base.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+        <state relative-caret-position="85">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="19" />
         </state>
       </provider>
     </entry>
