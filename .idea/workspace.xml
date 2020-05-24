@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="529ca211-4c9b-4778-a2a2-decd4b605f67" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_redis/registry.go" beforeDir="false" afterPath="$PROJECT_DIR$/_redis/registry.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_redis/util.go" beforeDir="false" afterPath="$PROJECT_DIR$/_redis/util.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_util/comm_util.go" beforeDir="false" afterPath="$PROJECT_DIR$/_util/comm_util.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/redis/r_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/redis/r_test.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,25 +12,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_redis/util.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="476">
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
               <folding>
                 <element signature="e#16#96#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/redis/r_test.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="72" selection-end-column="5" />
-              <folding>
-                <element signature="e#15#149#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,8 +49,8 @@
         <option value="$PROJECT_DIR$/test/config/conf_test.go" />
         <option value="$PROJECT_DIR$/_redis/registry.go" />
         <option value="$PROJECT_DIR$/_util/comm_util.go" />
-        <option value="$PROJECT_DIR$/_redis/util.go" />
         <option value="$PROJECT_DIR$/test/redis/r_test.go" />
+        <option value="$PROJECT_DIR$/_redis/util.go" />
       </list>
     </option>
   </component>
@@ -122,17 +106,6 @@
             <path>
               <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Go Modules &lt;github.com/leigg-go/go-util&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
-            </path>
-            <path>
-              <item name="go-util" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Go Modules &lt;github.com/leigg-go/go-util&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
-              <item name="redis@v6.15.7+incompatible" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -282,12 +255,12 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25383994" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25788197" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" weight="0.329718" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5740938" visible="true" weight="0.3265306" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5740938" weight="0.3265306" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -417,22 +390,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_redis/util.go">
+    <entry file="file://$PROJECT_DIR$/test/redis/r_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="-667">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="32" />
           <folding>
-            <element signature="e#16#96#0" expanded="true" />
+            <element signature="e#15#156#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/redis/r_test.go">
+    <entry file="file://$PROJECT_DIR$/_redis/util.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="72" selection-end-column="5" />
+        <state relative-caret-position="476">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
           <folding>
-            <element signature="e#15#149#0" expanded="true" />
+            <element signature="e#16#96#0" expanded="true" />
           </folding>
         </state>
       </provider>
