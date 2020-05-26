@@ -36,12 +36,6 @@ type ConfLoader interface {
 	GetConfPath() string
 }
 
-// ReadCmdArgs use fn to iterate command-line flags that have been set.
-func ReadCmdArgs(fn func(*flag.Flag)) {
-	flag.Parse()
-	flag.Visit(fn)
-}
-
 type share struct {
 	deployDir      string
 	fName          string

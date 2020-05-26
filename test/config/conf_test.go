@@ -58,7 +58,8 @@ func TestJsonLoaderAndReadCmdArgs(t *testing.T) {
 	_ = flag.Set("Host", flagHost)
 	_ = flag.Set("port", flagPort)
 
-	_config.ReadCmdArgs(func(i *flag.Flag) {
+	flag.Parse()
+	flag.Visit(func(i *flag.Flag) {
 		switch i.Name {
 		case "Host":
 			c.Host = *host
@@ -66,6 +67,7 @@ func TestJsonLoaderAndReadCmdArgs(t *testing.T) {
 			c.Port = *port
 		}
 	})
+
 	should := myConf{
 		Host: *host, Port: *port, Labels: []string{"a", "b", "c"}, Nested: struct {
 			Host   string
