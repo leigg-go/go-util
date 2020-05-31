@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"reflect"
 	"syscall"
 )
 
@@ -106,11 +107,11 @@ func CloseSvcSafely(manySvc []SvcWithClose) []error {
 		errs []error
 		err  error
 	)
-	for _, i := range manySvc {
-		if i == nil {
+	for _, s := range manySvc {
+		if reflect.ValueOf(s).IsNil() {
 			continue
 		}
-		if err = i.Close(); err != nil {
+		if err = s.Close(); err != nil {
 			errs = append(errs, err)
 		}
 	}
