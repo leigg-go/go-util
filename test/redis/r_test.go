@@ -10,13 +10,20 @@ import (
 	"time"
 )
 
+/*
+go-redis库测试
+
+NOTE: 只有类get命令在key不存在时err会等于redis.Nil, 其他如del命令在key不存在时err是nil。
+*/
 var opts = &redis.Options{
-	Addr:        "127.0.0.1:6379",
-	Password:    "123",
-	DB:          0,
-	PoolSize:    3,
-	MaxRetries:  3,
-	IdleTimeout: 60 * time.Second,
+	Addr:         "127.0.0.1:6379",
+	Password:     "123",
+	DB:           0,
+	DialTimeout:  2 * time.Second,
+	ReadTimeout:  3 * time.Second,
+	WriteTimeout: 3 * time.Second,
+	MinIdleConns: 1,
+	IdleTimeout:  3 * time.Second,
 }
 
 func TestMustInitDefClient(t *testing.T) {
@@ -71,4 +78,36 @@ func TestHScan(t *testing.T) {
 			break
 		}
 	}
+}
+
+func TestInfoClients(t *testing.T) {
+	_redis.MustInitDefClient(opts)
+	defer _redis.Close()
+
+	for i := 0; i < 100; i++ {
+		//r := _redis.DefClient.ClientID()  // redis 5.0 命令
+		r, err := _redis.DefClient.Do("info", "clients").String()
+		assert.Equal(t, err, nil)
+		fmt.Printf("目前的clients: %s\n", r)
+		time.Sleep(time.Second * 3)
+	}
+}
+
+func TestBasicCmds(t *testing.T) {
+	_redis.MustInitDefClient(opts)
+	defer _redis.Close()
+
+	err1 := _redis.DefClient.SetNX("TestBasicCmds", "x", time.Second).Val()
+	err2 := _redis.DefClient.SetNX("TestBasicCmds", "x", time.Second).Val()
+	log.Printf("err1:%v err2:%v\n", err1, err2)
+
+	// hash test
+	_redis.DefClient.HSet("TestBasicCmds_hash", "k1", "123")
+	r := _redis.DefClient.HGet("TestBasicCmds_hash", "k2")
+	log.Println(r.Result())        // 123 <nil>
+	log.Println("Err():", r.Err()) // if field does not exist, err=redis.Nil
+	log.Println(r.Val())           // 123
+
+	delNotFoundKeyErr := _redis.DefClient.HDel("TestBasicCmds_hash_not_found", "k").Err()
+	log.Printf("delNotFoundKeyErr:%v", delNotFoundKeyErr) // nil
 }
