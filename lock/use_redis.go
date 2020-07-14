@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// redis实现的锁
+// redis实现的分布式锁
 
 type DistributedLocker interface {
 	Lock(timeout time.Duration) error
@@ -33,7 +33,7 @@ var (
 	NotLockedErr = errors.New("acquire lock failed")
 )
 
-// Lock try to acquire `lock`, ctx is
+// Lock try to acquire `lock`
 func (l *DistributedLockInRedis) Lock(timeout time.Duration) (err error) {
 	pollIntvl := time.NewTicker(time.Millisecond * 50)
 	deadline := time.Now().Add(timeout)
@@ -58,6 +58,7 @@ func (l *DistributedLockInRedis) Lock(timeout time.Duration) (err error) {
 	}
 }
 
+// Lock try to release `lock`
 func (l *DistributedLockInRedis) UnLock() (err error) {
 	l.mutex.Lock()
 	defer l.mutex.Unlock()
