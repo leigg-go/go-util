@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// redis实现的分布式锁
+// Distributed Lock by redis.
 
 type DistributedLocker interface {
 	Lock(timeout time.Duration) error
@@ -34,8 +34,9 @@ var (
 )
 
 // Lock try to acquire `lock`
-func (l *DistributedLockInRedis) Lock(timeout time.Duration) (err error) {
+func (l *DistributedLockInRedis) Lock(timeout time.Duration) error {
 	pollIntvl := time.NewTicker(time.Millisecond * 50)
+	defer pollIntvl.Stop()
 	deadline := time.Now().Add(timeout)
 
 	for {
@@ -52,14 +53,14 @@ func (l *DistributedLockInRedis) Lock(timeout time.Duration) (err error) {
 			l.mutex.Lock()
 			l.locked = true
 			l.mutex.Unlock()
-			return
+			return nil
 		}
 		<-pollIntvl.C
 	}
 }
 
 // Lock try to release `lock`
-func (l *DistributedLockInRedis) UnLock() (err error) {
+func (l *DistributedLockInRedis) UnLock() error {
 	l.mutex.Lock()
 	defer l.mutex.Unlock()
 	if l.locked {
