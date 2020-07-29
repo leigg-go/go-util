@@ -6,7 +6,7 @@ import (
 )
 
 /*
-Two way linked list, suitable for frequent insertion / deletion scenarios.
+Two way linked list, suitable for frequent insertion、deletion scenarios.
 */
 
 type node struct {
@@ -22,6 +22,7 @@ type LinkList struct {
 	last  *node
 }
 
+// Deprecated, DO NOT USE!
 func NewLinkList() *LinkList {
 	return new(LinkList)
 }
