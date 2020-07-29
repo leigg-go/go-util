@@ -80,6 +80,15 @@ func PanicIfErr(err error, ignoreErrs []error, printText ...string) {
 	}
 }
 
+func AnyErr(errs ...error) error {
+	for _, e := range errs {
+		if e != nil {
+			return e
+		}
+	}
+	return nil
+}
+
 func Must(condition bool, err error) {
 	if !condition {
 		panic(err)

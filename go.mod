@@ -9,5 +9,6 @@ require (
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/onsi/ginkgo v1.12.1 // indirect
 	github.com/onsi/gomega v1.10.0 // indirect
+	github.com/stretchr/testify v1.6.1
 	gopkg.in/yaml.v2 v2.3.0
 )
