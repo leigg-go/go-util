@@ -3,10 +3,12 @@ package _util
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"os/signal"
 	"reflect"
 	"syscall"
+	"time"
 )
 
 /*
@@ -125,4 +127,12 @@ func CloseSvcSafely(manySvc []SvcWithClose) []error {
 		}
 	}
 	return errs
+}
+
+func RandInt(min, max int) int {
+	if min >= max || min == 0 || max == 0 {
+		return max
+	}
+	rand.Seed(time.Now().UnixNano())
+	return rand.Intn(max-min) + min
 }
