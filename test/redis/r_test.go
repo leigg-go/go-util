@@ -2,9 +2,9 @@ package redis
 
 import (
 	"fmt"
-	"github.com/bmizerany/assert"
 	"github.com/go-redis/redis"
 	"github.com/leigg-go/go-util/_redis"
+	"github.com/stretchr/testify/assert"
 	"log"
 	"testing"
 	"time"
@@ -17,7 +17,7 @@ NOTE: 只有类get命令在key不存在时err会等于redis.Nil, 其他如del命
 */
 var opts = &redis.Options{
 	Addr:         "127.0.0.1:6379",
-	Password:     "123",
+	Password:     "",
 	DB:           0,
 	DialTimeout:  2 * time.Second,
 	ReadTimeout:  3 * time.Second,
@@ -29,9 +29,7 @@ var opts = &redis.Options{
 func TestMustInitDefClient(t *testing.T) {
 
 	_redis.MustInitDefClient(opts)
-	assert.Panic(t, fmt.Errorf("_redis: DefClient already exists"), func() {
-		_redis.MustInitDefClient(opts)
-	})
+	assert.Panics(t, func() { _redis.MustInitDefClient(opts) }, fmt.Errorf("_redis: DefClient already exists"))
 	defer _redis.Close()
 
 	_, err := _redis.DefClient.Set("k", "v", 1*time.Second).Result()
