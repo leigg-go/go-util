@@ -1,5 +1,11 @@
 # go-util
-go utils. e.g. orm/redis...
+go's common tools.  
+
+For example:
+ -  DB operations: Mysql/MongoDB/Redis
+ -  Go type util, e.g. _`[]string to []interface{}`_, `IntEach`, `StrEach`...
+ -  Some util method like `InCollection`, `PanicIfErr`, `Must`, `RandInt(min,max)`
+ -  Config Loader that 
 
 All pkg name starts with `_`, e.g. `_redis`, `_config`
 
