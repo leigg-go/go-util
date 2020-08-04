@@ -1,11 +1,11 @@
 package lock
 
 import (
-	"github.com/bmizerany/assert"
 	"github.com/go-redis/redis"
 	"github.com/leigg-go/go-util/_lock"
 	"github.com/leigg-go/go-util/_redis"
 	"github.com/leigg-go/go-util/_util"
+	"github.com/stretchr/testify/assert"
 	"log"
 	"sync"
 	"testing"

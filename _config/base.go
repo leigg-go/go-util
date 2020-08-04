@@ -83,7 +83,7 @@ func (s *share) LoadPath(suffix string) {
 		// Rule of confPath concat
 		s.confPath = filepath.Join(s.deployDir, s.confFolderName, s.fName+suffix)
 		absP, err := filepath.Abs(s.confPath)
-		_util.PanicIfErr(err, nil, "_config: %v")
+		_util.PanicIfErr(err, nil, fmt.Sprintf("_config: %v", err))
 		s.confPath = absP
 	}()
 
@@ -124,7 +124,7 @@ func (l *JsonLoader) MustLoad(conf interface{}) {
 	l.LoadPath(".json")
 
 	b, err := ioutil.ReadFile(l.confPath)
-	_util.PanicIfErr(err, nil, "_config: %v")
+	_util.PanicIfErr(err, nil, fmt.Sprintf("_config: %v", err))
 	_util.PanicIfErr(json.Unmarshal(b, conf), nil)
 }
 
@@ -136,7 +136,7 @@ func (l *YamlLoader) MustLoad(conf interface{}) {
 	l.LoadPath(".yaml")
 
 	b, err := ioutil.ReadFile(l.confPath)
-	_util.PanicIfErr(err, nil, "_config: %v")
+	_util.PanicIfErr(err, nil, fmt.Sprintf("_config: %v", err))
 	_util.PanicIfErr(yaml.Unmarshal(b, conf), nil)
 }
 
@@ -148,7 +148,7 @@ func (l *TomlLoader) MustLoad(conf interface{}) {
 	l.LoadPath(".toml")
 
 	b, err := ioutil.ReadFile(l.confPath)
-	_util.PanicIfErr(err, nil, "_config: %v")
+	_util.PanicIfErr(err, nil, fmt.Sprintf("_config: %v", err))
 	_util.PanicIfErr(toml.Unmarshal(b, conf), nil)
 }
 

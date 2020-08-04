@@ -1,7 +1,6 @@
 package _util
 
 import (
-	"fmt"
 	"log"
 	"math/rand"
 	"os"
@@ -66,7 +65,7 @@ func InCollection(elem interface{}, coll []interface{}) bool {
 	return false
 }
 
-func PanicIfErr(err error, ignoreErrs []error, printText ...string) {
+func PanicIfErr(err interface{}, ignoreErrs []error, printText ...string) {
 	if err != nil {
 		var intErrs []interface{}
 		for _, e := range ignoreErrs {
@@ -76,7 +75,7 @@ func PanicIfErr(err error, ignoreErrs []error, printText ...string) {
 			return
 		}
 		if len(printText) > 0 {
-			panic(fmt.Sprintf(printText[0], err))
+			panic(printText[0])
 		}
 		panic(err)
 	}
