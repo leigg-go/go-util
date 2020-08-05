@@ -27,7 +27,8 @@ var opts = &redis.Options{
 }
 
 func initClient() {
-	if _redis.DefClient == nil {
+	if _redis.DefClient == nil || _redis.DefClient.Ping().Err() != nil {
+		_redis.DefClient = nil
 		_redis.MustInitDefClient(opts)
 	}
 }
