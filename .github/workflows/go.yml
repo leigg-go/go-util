@@ -1,5 +1,5 @@
 name: Go
-trigger-counter: 0
+trigger-counter: 1
 
 on:
   push:
