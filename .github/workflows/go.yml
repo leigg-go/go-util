@@ -7,10 +7,6 @@ on:
       - '**go.yml'
     
 jobs:
-  trigger:
-    steps:
-      - name: trigger
-        run: echo 1
   test:
     if: contains(github, searchValue)
     runs-on: ubuntu-latest
@@ -18,6 +14,9 @@ jobs:
       matrix:
         redis-version: [3]
     steps:
+      - name: trigger
+        run: echo 1
+
       - name: Set up Go 1.x
         uses: actions/setup-go@v2
         with:
