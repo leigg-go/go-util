@@ -75,7 +75,8 @@ func TestHScan(t *testing.T) {
 			t.Errorf("%v", err)
 			break
 		}
-		fmt.Printf("kv-pairs: %d\n", len(_redis.StringMap(s)))
+
+		assert.True(t, len(_redis.StringMap(s)) > 1)
 
 		if cursor == 0 {
 			log.Printf("2 %v", err)
