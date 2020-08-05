@@ -2,8 +2,8 @@ package typ
 
 import (
 	"fmt"
-	"github.com/bmizerany/assert"
 	"github.com/leigg-go/go-util/_typ/_interf"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 

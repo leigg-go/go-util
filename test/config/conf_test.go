@@ -2,8 +2,8 @@ package config
 
 import (
 	"flag"
-	"github.com/bmizerany/assert"
 	"github.com/leigg-go/go-util/_config"
+	"github.com/stretchr/testify/assert"
 	"log"
 	"os"
 	"path/filepath"
