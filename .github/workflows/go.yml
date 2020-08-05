@@ -7,7 +7,9 @@ on:
       - '**go.yml'
     
 jobs:
-  tregger
+  trigger:
+    count: 1
+
   test:
     if: contains(github, searchValue)
     runs-on: ubuntu-latest
