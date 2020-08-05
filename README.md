@@ -5,7 +5,7 @@ For example:
  -  DB operations: Mysql/MongoDB/Redis
  -  Go type util, e.g. _`[]string to []interface{}`_, `IntEach`, `StrEach`...
  -  Some util method like `InCollection`, `PanicIfErr`, `Must`, `RandInt(min,max)`
- -  Config Loader that 
+ -  Config Loader that load config from flag/env/config-file with a fixed mode.
 
 All pkg name starts with `_`, e.g. `_redis`, `_config`
 
