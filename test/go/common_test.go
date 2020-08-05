@@ -9,7 +9,7 @@ import (
 )
 
 func TestAsyncTask(t *testing.T) {
-	s := &http.Server{Addr: ":999"}
+	s := &http.Server{Addr: ":10241"}
 
 	ak := _go.NewAsyncTask()
 	ak.Run(func() {

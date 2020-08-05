@@ -26,8 +26,13 @@ var opts = &redis.Options{
 	IdleTimeout:  3 * time.Second,
 }
 
-func TestMustInitDefClient(t *testing.T) {
+func initClient() {
+	if _redis.DefClient == nil {
+		_redis.MustInitDefClient(opts)
+	}
+}
 
+func TestMustInitDefClient(t *testing.T) {
 	_redis.MustInitDefClient(opts)
 	assert.Panics(t, func() { _redis.MustInitDefClient(opts) }, fmt.Errorf("_redis: DefClient already exists"))
 	defer _redis.Close()
@@ -45,7 +50,7 @@ func TestMustInitDefClient(t *testing.T) {
 }
 
 func TestHScan(t *testing.T) {
-	_redis.MustInitDefClient(opts)
+	initClient()
 	defer _redis.Close()
 	hk := "hk1"
 	//defer _redis.DefClient.Del(hk)
@@ -79,7 +84,7 @@ func TestHScan(t *testing.T) {
 }
 
 func TestInfoClients(t *testing.T) {
-	_redis.MustInitDefClient(opts)
+	initClient()
 	defer _redis.Close()
 
 	for i := 0; i < 100; i++ {
@@ -92,7 +97,7 @@ func TestInfoClients(t *testing.T) {
 }
 
 func TestBasicCmds(t *testing.T) {
-	_redis.MustInitDefClient(opts)
+	initClient()
 	defer _redis.Close()
 
 	err1 := _redis.DefClient.SetNX("TestBasicCmds", "x", time.Second).Val()
