@@ -9,8 +9,8 @@ on:
 jobs:
   trigger:
     steps:
-      - name: 1
-
+      - name: trigger
+        run: echo 1
   test:
     if: contains(github, searchValue)
     runs-on: ubuntu-latest
