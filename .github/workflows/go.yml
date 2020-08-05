@@ -1,11 +1,15 @@
 name: Go
+trigger-counter: 0
 
 on:
   push:
     branches: [ master ]
-
+    paths:
+      - 'go.yml'
+    
 jobs:
   test:
+    if: contains(github, searchValue)
     runs-on: ubuntu-latest
     strategy:
       matrix:
