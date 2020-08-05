@@ -1,11 +1,9 @@
 name: Go
-trigger-count: 0
 
 on:
   push:
     branches: [ master ]
-    paths:
-      - 'go.yml'
+
 jobs:
   test:
     runs-on: ubuntu-latest
