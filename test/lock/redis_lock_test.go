@@ -71,6 +71,6 @@ func TestNewDistributedLockInRedis(t *testing.T) {
 
 	// 上面的所有goroutine应该释放锁，下面再执行一次，应该可以获得锁
 	wg.Add(1)
-	NoCurrencyTask(t, 1000000, nil)
+	NoCurrencyTask(t, 1000, nil)
 	assert.Equal(t, globalCounter, 2)
 }
