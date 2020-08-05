@@ -80,4 +80,4 @@ interfSlice := _interf.ToSliceInterface(intSlice) // get []interface{}{1,2,3}
 // ToSliceInterface supports int/int16/int32/int64/string/... slice
 ```
 
-More usage cases, see 
+About More usage cases, see [test dir](https://github.com/leigg-go/go-util/tree/master/test). 
