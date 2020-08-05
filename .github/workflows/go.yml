@@ -8,7 +8,6 @@ on:
     
 jobs:
   test:
-    if: contains(github, searchValue)
     runs-on: ubuntu-latest
     strategy:
       matrix:
