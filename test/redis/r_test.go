@@ -87,12 +87,12 @@ func TestInfoClients(t *testing.T) {
 	initClient()
 	defer _redis.Close()
 
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 3; i++ {
 		//r := _redis.DefClient.ClientID()  // redis 5.0 命令
 		r, err := _redis.DefClient.Do("info", "clients").String()
 		assert.Equal(t, err, nil)
 		fmt.Printf("目前的clients: %s\n", r)
-		time.Sleep(time.Second * 3)
+		time.Sleep(time.Second * 2)
 	}
 }
 
