@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
     paths:
-      - '.github/workflows/go.yml'
+      - '.github/workflows/.trigger.go'
     
 jobs:
   test:
@@ -13,14 +13,10 @@ jobs:
       matrix:
         redis-version: [3]
     steps:
-      - name: trigger
-        run: echo 2
-
       - name: Set up Go 1.x
         uses: actions/setup-go@v2
         with:
           go-version: ^1.13
-        id: go
         
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
