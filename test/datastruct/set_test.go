@@ -9,7 +9,7 @@ import (
 
 func TestSet(t *testing.T) {
 
-	set := _datastruct.NewHashSet()
+	set := _datastruct.NewConcurrencyMap()
 	for i := 0; i < 10; i++ {
 		assert.True(t, set.AddElem(i))
 	}

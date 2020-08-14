@@ -1,8 +1,14 @@
 package _util
 
 import (
+	"bytes"
+	"encoding/base64"
+	"encoding/json"
+	"errors"
+	"fmt"
 	"log"
 	"math/rand"
+	"net/http"
 	"os"
 	"os/signal"
 	"reflect"
@@ -134,4 +140,55 @@ func RandInt(min, max int) int {
 	}
 	rand.Seed(time.Now().UnixNano())
 	return rand.Intn(max-min) + min
+}
+
+var shanghai, _ = time.LoadLocation("Asia/Shanghai")
+var simpleLayout = "2006-01-02 15:04:05"
+
+func LoadShanghaiTimeFromStr(s string) (time.Time, error) {
+	return time.ParseInLocation(simpleLayout, s, shanghai)
+}
+
+func ShortUrl(oldUrl string) (string, error) {
+	servUrl := "https://sina.lt/api.php?from=w&url=%s&site=dwz.date"
+	type rsp struct {
+		Result string
+		Data   interface{}
+	}
+
+	bb := &bytes.Buffer{}
+	encoder := base64.NewEncoder(base64.StdEncoding, bb)
+	_, _ = encoder.Write([]byte(oldUrl))
+	_ = encoder.Close()
+
+	req, _ := http.NewRequest("GET", fmt.Sprintf(servUrl, bb.String()), nil)
+	req.Header.Add("referer", "https://sina.lt/")
+	req.Header.Add("PHPSESSID", "s7qtpi42pr73u6r73p6q3fj2n2")
+	req.Header.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36 SE 2.X MetaSr 1.0")
+
+	var cli = http.Client{
+		Timeout: time.Second * 6,
+	}
+	r, err := cli.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer r.Body.Close()
+
+	//body, err := ioutil.ReadAll(r.Body)
+	//log.Println(string(body))
+	//if err != nil {
+	//	return "", err
+	//}
+
+	var jsonRsp = new(rsp)
+	err = json.NewDecoder(r.Body).Decode(jsonRsp)
+	if err != nil {
+		return "", err
+	}
+	if jsonRsp.Result != "ok" {
+		log.Println(jsonRsp.Data)
+		return "", errors.New(jsonRsp.Result)
+	}
+	return jsonRsp.Data.(string), nil
 }
