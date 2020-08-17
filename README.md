@@ -2,7 +2,7 @@
 go's common tools.  
 
 For example:
- -  DB operations: Mysql/MongoDB/Redis
+ -  DB operations: Mysql/Redis(ok), MongoDB(todo)
  -  Go type util, e.g. _`[]string to []interface{}`_, `IntEach`, `StrEach`...
  -  Some util method like `InCollection`, `PanicIfErr`, `Must`, `RandInt(min,max)`
  -  Config Loader that load config from flag/env/config-file with a fixed mode.
