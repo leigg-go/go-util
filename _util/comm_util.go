@@ -12,6 +12,8 @@ import (
 	"os"
 	"os/signal"
 	"reflect"
+	"runtime"
+	"strings"
 	"syscall"
 	"time"
 )
@@ -167,7 +169,7 @@ func ShortUrl(oldUrl string) (string, error) {
 	req.Header.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36 SE 2.X MetaSr 1.0")
 
 	var cli = http.Client{
-		Timeout: time.Second * 6,
+		Timeout: time.Second * 5,
 	}
 	r, err := cli.Do(req)
 	if err != nil {
@@ -191,4 +193,28 @@ func ShortUrl(oldUrl string) (string, error) {
 		return "", errors.New(jsonRsp.Result)
 	}
 	return jsonRsp.Data.(string), nil
+}
+
+// 获取指定函数的名称, split:分割符，`.`获取纯函数名， `/`获取带pkg的函数名，如 _util.GetFuncName
+func GetFuncName(funcObj interface{}, split ...string) string {
+	fn := runtime.FuncForPC(reflect.ValueOf(funcObj).Pointer()).Name()
+	if len(split) > 0 {
+		fs := strings.Split(fn, split[0])
+		return fs[len(fs)-1]
+	}
+	return fn
+}
+
+// 当前运行的函数名, split:分割符，不传就是获取全路径的函数名称
+// split 传入 `.`获取纯函数名， `/`获取带pkg的函数名，如 _util.GetRunningFuncName
+func GetRunningFuncName(split ...string) string {
+	pc := make([]uintptr, 1)
+	runtime.Callers(2, pc)
+	fn := runtime.FuncForPC(pc[0]).Name()
+
+	if len(split) > 0 {
+		fs := strings.Split(fn, split[0])
+		return fs[len(fs)-1]
+	}
+	return fn
 }
