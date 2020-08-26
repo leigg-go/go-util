@@ -40,7 +40,7 @@ func NoCurrencyTask(t *testing.T, i int, wg *sync.WaitGroup) {
 			wg.Done()
 		}
 	}()
-	lock := _lock.NewDistributedLockInRedis(_redis.DefClient, DistributedLockInRedisKey, nil, DistributedLockInRedisExpire)
+	lock := _lock.NewDistributedLockByRedis(_redis.DefClient, DistributedLockInRedisKey, nil, DistributedLockInRedisExpire)
 	// 获取锁操作需设置超时，因为是通过网络, 注意这个超时不要设置太小(需大于正常操作耗时)
 	err := lock.Lock(time.Millisecond * 50)
 	if err != nil {

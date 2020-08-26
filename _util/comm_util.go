@@ -19,7 +19,7 @@ import (
 )
 
 /*
-这是一种资源清理模式。首先进程退出的方式有三种：
+这是一种优雅的进程退出时的资源清理模式。首先进程退出的方式有三种：
 1. init时某些操作返回err(主协程内的操作)，需要退出
 2. 运行时的panic
 3. ctrl+C或其他外部信号
@@ -29,39 +29,41 @@ import (
 对于第三种情况就很简单，信号监听和资源清理都在OnProcessExit内部完成
 */
 // 监听[进程退出信号]的协程，完成资源释放工作
-func OnProcessExit(doWhenClose func()) (chan<- struct{}, <-chan struct{}) {
+func OnProcessExit(doWhenClose func()) <-chan struct{} {
 	done := make(chan struct{})
-	shouldExit := make(chan struct{})
 	go func() {
 		// 监听进程外部信号
-		sysSignalChan := make(chan os.Signal)
-		signal.Notify(sysSignalChan,
+		sc := make(chan os.Signal)
+		signal.Notify(sc,
 			syscall.SIGHUP, // 终端线挂断
 			syscall.SIGINT, // 键盘中断
 			//syscall.SIGKILL, // kill信号无法捕捉
 			syscall.SIGTERM, // 软件终止
 		)
-		var onSignal bool
 		select {
-		case <-shouldExit:
-			log.Println("OnProcessExit read chan-shouldExit!")
-		case s := <-sysSignalChan:
-			onSignal = true
+		case s := <-sc:
 			log.Printf("OnCloseSignal: %s\n", s)
 		}
-		signal.Stop(sysSignalChan)
-		close(sysSignalChan)
-		doWhenClose()
+		signal.Stop(sc)
+		close(sc)
+
+		onClose := func() {
+			defer func() {
+				if err := recover(); err != nil {
+					log.Printf("****** doWhenClose paniced:%v ******", err)
+				}
+			}()
+			doWhenClose()
+		}
+
+		onClose()
+
 		log.Println("OnProcessExit complete!")
 
 		close(done)
-
-		if onSignal {
-			os.Exit(0)
-		}
-		// 不是signal不要退出（否则看不到panic信息），外面调用了ctx.Cancel()，那必须在外面发生panic
+		os.Exit(1)
 	}()
-	return shouldExit, done
+	return done
 }
 
 func InCollection(elem interface{}, coll []interface{}) bool {

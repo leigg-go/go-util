@@ -24,7 +24,7 @@ type DistributedLockInRedis struct {
 	locked bool
 }
 
-func NewDistributedLockInRedis(c *redis.Client, k string, v []byte, expire time.Duration) DistributedLocker {
+func NewDistributedLockByRedis(c *redis.Client, k string, v []byte, expire time.Duration) DistributedLocker {
 	return &DistributedLockInRedis{redisC: c, key: k, value: v, expire: expire}
 }
 

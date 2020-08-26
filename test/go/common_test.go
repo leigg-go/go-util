@@ -11,15 +11,20 @@ import (
 func TestAsyncTask(t *testing.T) {
 	s := &http.Server{Addr: ":10241"}
 
-	ak := _go.NewAsyncTask()
-	ak.Run(func() {
-		log.Printf("server started...")
-		ak.Error = s.ListenAndServe()
+	ak := _go.NewSafeAsyncTask()
+	ak.AddTask(func() {
+		log.Printf("server1 started...")
+		//panic("111")
+		ak.SetErr(s.ListenAndServe())
+
+	})
+	ak.AddTask(func() {
+		log.Printf("stop task started...")
+		time.Sleep(time.Second)
+		_ = s.Close()
 	})
 
-	time.Sleep(time.Second)
-	s.Close()
+	ak.RunAndWait()
 
-	ak.Wait()
-	log.Println("server closed, err:", ak.Error)
+	log.Println("server closed, err:", ak.Err()) // http.ErrServerClosed
 }

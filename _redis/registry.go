@@ -8,7 +8,7 @@ import (
 )
 
 /*
-Redis registry, project could init redis client by call them directly.
+Redis registry, app could init redis client by call them directly.
 */
 
 var (
@@ -22,10 +22,10 @@ func MustInitDefClient(opts *redis.Options) {
 	defer lock.Unlock()
 	_util.Must(DefClient == nil, fmt.Errorf("_redis: DefClient already exists"))
 
-	DefClient = newCli(opts)
+	DefClient = newClient(opts)
 }
 
-func newCli(opts *redis.Options) *redis.Client {
+func newClient(opts *redis.Options) *redis.Client {
 	cli := redis.NewClient(opts)
 	_, err := cli.Ping().Result()
 	if err != nil {
