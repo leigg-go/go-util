@@ -46,3 +46,17 @@ func ListDir(dir string, flag ...string) ([]os.FileInfo, error) {
 	})
 	return files, err
 }
+
+// IsExist return false if path not exist or err not equal nil
+func IsExist(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil || os.IsExist(err)
+}
+
+func IsFile(fPath string) (bool, error) {
+	fi, e := os.Stat(fPath)
+	if e != nil {
+		return false, e
+	}
+	return !fi.IsDir(), nil
+}
