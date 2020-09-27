@@ -21,8 +21,8 @@ type DistributedLockInRedis struct {
 	expire time.Duration
 	// mutex allow to share a Lock in multi goroutines
 	mu sync.RWMutex
-	// `isLocked` maintains lock state in currency goroutine, it avoids unlocking lock
-	// that do not belong to currency goroutine.
+	// `isLocked` maintains lock state in multi goroutines, it avoids unlocking lock
+	// that do not belong to current lock creator
 	isLocked bool
 }
 
