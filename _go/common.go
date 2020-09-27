@@ -27,7 +27,7 @@ func (a *SafeAsyncTask) schedule() {
 		go func(f func()) {
 			defer func() {
 				if err := recover(); err != nil {
-					a.SetErr(fmt.Errorf("%v", err))
+					a.SetErr(fmt.Errorf("panic: %v", err))
 				}
 				a.wg.Done()
 			}()
