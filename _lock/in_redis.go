@@ -12,6 +12,7 @@ import (
 type DistributedLock interface {
 	Lock(timeout time.Duration) error
 	UnLock() error
+	Copy() DistributedLock
 }
 
 type DistributedLockInRedis struct {
@@ -84,4 +85,16 @@ func (l *DistributedLockInRedis) setLockState(state bool) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	l.isLocked = state
+}
+
+// Copy copy all attrs but mutex and lock state
+func (l *DistributedLockInRedis) Copy() DistributedLock {
+	return &DistributedLockInRedis{
+		redisC:   l.redisC,
+		key:      l.key,
+		value:    l.value,
+		expire:   l.expire,
+		mu:       sync.RWMutex{},
+		isLocked: false,
+	}
 }
