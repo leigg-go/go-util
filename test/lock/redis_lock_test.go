@@ -41,8 +41,7 @@ func noCurrencyTask(t *testing.T, i int, wg *sync.WaitGroup, lock _lock.Distribu
 		}
 	}()
 	// 每个goroutine应该独享一个lock对象，但是lock key是相同的
-	// 获取锁操作需设置超时，因为是通过网络, 注意这个超时不要设置太小(需大于正常操作耗时)
-	err := lock.Lock(time.Millisecond * 50)
+	_, err := lock.Lock()
 	if err != nil {
 		assert.Equal(t, err, _lock.TimeoutErr)
 		log.Printf("goroutine %d lock timeout!", i)
@@ -61,7 +60,11 @@ func TestNewDistributedLockInRedis(t *testing.T) {
 	_redis.MustInitDefClient(opts)
 	defer _redis.Close()
 
-	lock := _lock.NewDistributedLockByRedis(_redis.DefClient, DistributedLockInRedisKey, nil, DistributedLockInRedisExpire)
+	// 获取锁操作需设置超时，>估计网络耗时
+	// 另外还需设置重试，如果不重试，lock只会执行一次redis SetNX操作
+	opt := _lock.LockOption{Timeout: time.Millisecond * 50, Retry: true}
+
+	lock := _lock.NewDistributedLockByRedis(_redis.DefClient, DistributedLockInRedisKey, nil, DistributedLockInRedisExpire, opt)
 
 	var wg sync.WaitGroup
 	for i := 0; i < goroutineCount; i++ {
@@ -80,15 +83,18 @@ func TestNewDistributedLockInRedis(t *testing.T) {
 func TestLockErr(t *testing.T) {
 	_redis.MustInitDefClient(opts)
 	defer _redis.Close()
+
+	opt := _lock.LockOption{Timeout: time.Millisecond * 50, Retry: true}
+
 	// 每个goroutine应该独享一个lock对象，但是lock key是相同的
-	lock := _lock.NewDistributedLockByRedis(_redis.DefClient, DistributedLockInRedisKey, nil, DistributedLockInRedisExpire)
+	lock := _lock.NewDistributedLockByRedis(_redis.DefClient, DistributedLockInRedisKey, nil, DistributedLockInRedisExpire, opt)
 	// 获取锁操作需设置超时，因为是通过网络, 注意这个超时不要设置太小(需大于正常操作耗时)
-	err := lock.Lock(time.Millisecond * 50)
+	_, err := lock.Lock()
 	if err != nil {
 		t.Fatalf("Should be nil, but got err:%v", err)
 	}
 	// 上面还没释放锁，同一个内存对象再去获取锁，就会panic
-	err = lock.Lock(time.Millisecond * 50)
+	_, err = lock.Lock()
 	assert.Equal(t, _lock.AlreadyAcquiredErr, err)
 
 	err = lock.UnLock()
