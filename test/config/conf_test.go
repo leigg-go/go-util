@@ -109,6 +109,8 @@ type tomlConf struct {
 		Host   string
 		Port   int
 		Labels []string
+		True   bool
+		False  bool
 		Nested struct {
 			Host   string
 			Port   int
@@ -136,12 +138,14 @@ func TestTomlLoader(t *testing.T) {
 			Host   string
 			Port   int
 			Labels []string
+			True   bool
+			False  bool
 			Nested struct {
 				Host   string
 				Port   int
 				Labels []string
 			}
-		}{Host: "1.1.1.1", Port: 666, Labels: []string{"a", "b", "c"},
+		}{Host: "1.1.1.1", Port: 666, Labels: []string{"a", "b", "c"}, True: true, False: false,
 			// nested struct
 			Nested: struct {
 				Host   string

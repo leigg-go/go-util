@@ -1,9 +1,11 @@
 TITLE="toml example" # comment is supported
 
-[Mysql]
+[mysql]
 host= "1.1.1.1" # str have to be quoted by `"`
 port=666
 labels=["a","b","c"]
+true=true
+false=false
     [Mysql.NESTED] # nested struct
     host= "1.1.1.1"
     port=777
