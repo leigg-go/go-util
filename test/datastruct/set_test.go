@@ -28,4 +28,11 @@ func TestSet(t *testing.T) {
 		return true
 	}
 	set.Range(iterate)
+
+	st := _datastruct.NewSet()
+	st.Add(1, 23, 4, 1)
+	st.Remove(23)
+	assert.Equal(t, st.Size(), 2)
+	assert.True(t, st.Contains(1) && st.Contains(4))
+	assert.False(t, st.Contains(23))
 }
