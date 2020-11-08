@@ -57,7 +57,7 @@ func noCurrencyTask(t *testing.T, i int, wg *sync.WaitGroup, lock _lock.Distribu
 }
 
 func TestNewDistributedLockInRedis(t *testing.T) {
-	_redis.MustInitDefClient(opts)
+	_redis.MustInitDef(opts)
 	defer _redis.Close()
 
 	// 获取锁操作需设置超时，>估计网络耗时
@@ -81,7 +81,7 @@ func TestNewDistributedLockInRedis(t *testing.T) {
 }
 
 func TestLockErr(t *testing.T) {
-	_redis.MustInitDefClient(opts)
+	_redis.MustInitDef(opts)
 	defer _redis.Close()
 
 	opt := _lock.LockOption{Timeout: time.Millisecond * 50, Retry: true}

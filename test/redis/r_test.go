@@ -29,13 +29,13 @@ var opts = &redis.Options{
 func initClient() {
 	if _redis.DefClient == nil || _redis.DefClient.Ping().Err() != nil {
 		_redis.DefClient = nil
-		_redis.MustInitDefClient(opts)
+		_redis.MustInitDef(opts)
 	}
 }
 
 func TestMustInitDefClient(t *testing.T) {
-	_redis.MustInitDefClient(opts)
-	assert.Panics(t, func() { _redis.MustInitDefClient(opts) }, fmt.Errorf("_redis: DefClient already exists"))
+	_redis.MustInitDef(opts)
+	assert.Panics(t, func() { _redis.MustInitDef(opts) }, fmt.Errorf("_redis: DefClient already exists"))
 	defer _redis.Close()
 
 	_, err := _redis.DefClient.Set("k", "v", 1*time.Second).Result()
