@@ -1,4 +1,4 @@
-package _orm
+package orm
 
 import (
 	"github.com/leigg-go/go-util/_orm/_gorm"
@@ -10,7 +10,7 @@ import (
 )
 
 func TestMustInitDef(t *testing.T) {
-	dsn := "root:123@tcp(127.0.0.1:3306)/main?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:123@tcp(127.0.0.1:3306)/go_util?charset=utf8mb4&parseTime=True&loc=Local"
 	conf := &gorm.Config{
 		SkipDefaultTransaction: true,
 		//Logger:                 logger.Default,
