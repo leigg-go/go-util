@@ -46,6 +46,10 @@ func ToSliceInterface(slice interface{}) []interface{} {
 		_int.UIntEach(slice.([]uint), func(seq int, elem uint) {
 			ret = append(ret, elem)
 		})
+	case []uint8:
+		_int.UInt8Each(slice.([]uint8), func(seq int, elem uint8) {
+			ret = append(ret, elem)
+		})
 	case []uint32:
 		_int.UInt32Each(slice.([]uint32), func(seq int, elem uint32) {
 			ret = append(ret, elem)
