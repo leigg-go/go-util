@@ -10,15 +10,24 @@ import (
 )
 
 // 后面需要什么类型继续增加, 但只能加通用的
+// 如果参数不是slice会panic
 func ToSliceInterface(slice interface{}) []interface{} {
 	typ := fmt.Sprintf("%T", slice)
 	if !strings.HasPrefix(typ, "[]") {
-		panic(fmt.Sprintf("<%s> not slice type", typ))
+		panic(fmt.Sprintf("<%s> is not slice type", typ))
 	}
 	var ret []interface{}
 	switch slice.(type) {
+	case []string:
+		_str.Each(slice.([]string), func(seq int, elem string) {
+			ret = append(ret, elem)
+		})
 	case []int:
 		_int.IntEach(slice.([]int), func(seq int, elem int) {
+			ret = append(ret, elem)
+		})
+	case []int8:
+		_int.Int8Each(slice.([]int8), func(seq int, elem int8) {
 			ret = append(ret, elem)
 		})
 	case []int16:
@@ -33,8 +42,20 @@ func ToSliceInterface(slice interface{}) []interface{} {
 		_int.Int64Each(slice.([]int64), func(seq int, elem int64) {
 			ret = append(ret, elem)
 		})
-	case []string:
-		_str.Each(slice.([]string), func(seq int, elem string) {
+	case []uint:
+		_int.UIntEach(slice.([]uint), func(seq int, elem uint) {
+			ret = append(ret, elem)
+		})
+	case []uint32:
+		_int.UInt32Each(slice.([]uint32), func(seq int, elem uint32) {
+			ret = append(ret, elem)
+		})
+	case []uint64:
+		_int.UInt64Each(slice.([]uint64), func(seq int, elem uint64) {
+			ret = append(ret, elem)
+		})
+	case []float32:
+		_float.Float32Each(slice.([]float32), func(seq int, elem float32) {
 			ret = append(ret, elem)
 		})
 	case []float64:
