@@ -31,3 +31,18 @@ func GetEachDayZeroClockFromStToEt(st, et time.Time) []time.Time {
 	}
 	return ret
 }
+
+func NextMonthFirstDay(t time.Time) time.Time {
+	t = t.AddDate(0, 1, 0)
+	return time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, t.Location())
+}
+
+// 返回给定起始结束时间范围内的月份时间，t为每月1日0点0分...
+func GetMonthList(startTime, endTime time.Time) []time.Time {
+	var ret []time.Time
+	for endTime.Sub(startTime) >= 0 {
+		ret = append(ret, time.Date(startTime.Year(), startTime.Month(), 1, 0, 0, 0, 0, startTime.Location()))
+		startTime = NextMonthFirstDay(startTime)
+	}
+	return ret
+}
