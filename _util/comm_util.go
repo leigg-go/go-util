@@ -77,12 +77,10 @@ func InCollection(elem interface{}, coll []interface{}) bool {
 
 func PanicIfErr(err interface{}, ignoreErrs []error, printText ...string) {
 	if err != nil {
-		var intErrs []interface{}
 		for _, e := range ignoreErrs {
-			intErrs = append(intErrs, e)
-		}
-		if InCollection(err, intErrs) {
-			return
+			if e == err {
+				return
+			}
 		}
 		if len(printText) > 0 {
 			panic(printText[0])
