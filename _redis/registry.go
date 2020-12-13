@@ -41,10 +41,7 @@ func newClient(opts *redis.Options) *redis.Client {
 func Close() error {
 	lock.Lock()
 	defer lock.Unlock()
-	if DefClient != nil {
-		err := DefClient.Close()
-		DefClient = nil
-		return err
-	}
-	return nil
+	err := DefClient.Close()
+	DefClient = nil
+	return err
 }

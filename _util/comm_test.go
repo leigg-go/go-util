@@ -18,7 +18,7 @@ func TestRandInt(t *testing.T) {
 
 func TestShortUrl(t *testing.T) {
 	u1 := "http://baidu.com"
-	newU, err := ShortUrl(u1)
+	newU, err := shortUrl(u1)
 	log.Println(newU, err)
 }
 

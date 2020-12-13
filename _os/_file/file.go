@@ -60,3 +60,10 @@ func IsFile(fPath string) (bool, error) {
 	}
 	return !fi.IsDir(), nil
 }
+
+func MkdirIfNotExist(fPath string) error {
+	if IsExist(fPath) {
+		return nil
+	}
+	return os.Mkdir(fPath, 0755)
+}

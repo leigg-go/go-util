@@ -38,11 +38,8 @@ func MustInit(dialer gorm.Dialector, conf *gorm.Config) *gorm.DB {
 func Close() error {
 	lock.Lock()
 	defer lock.Unlock()
-	if DefGormDB != nil {
-		db, _ := DefGormDB.DB()
-		err := db.Close()
-		DefGormDB = nil
-		return err
-	}
-	return nil
+	db, _ := DefGormDB.DB()
+	err := db.Close()
+	DefGormDB = nil
+	return err
 }

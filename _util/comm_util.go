@@ -9,62 +9,11 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
-	"os"
-	"os/signal"
 	"reflect"
 	"runtime"
 	"strings"
-	"syscall"
 	"time"
 )
-
-/*
-这是一种优雅的进程退出时的资源清理模式。首先进程退出的方式有三种：
-1. init时某些操作返回err(主协程内的操作)，需要退出
-2. 运行时的panic
-3. ctrl+C或其他外部信号
-=========================
-对于第一种情况，在函数返回err时可直接panic，main函数会捕捉并通知OnProcessExit处理
-对于第二种，只要不是子协程内发生的panic，main的defer可以捕捉并处理;如果是子协程panic(预期内的),最后通过某种方式通知主协程，而不是直接panic
-对于第三种情况就很简单，信号监听和资源清理都在OnProcessExit内部完成
-*/
-// 监听[进程退出信号]的协程，完成资源释放工作
-func OnProcessExit(doWhenClose func()) <-chan struct{} {
-	done := make(chan struct{})
-	go func() {
-		// 监听进程外部信号
-		sc := make(chan os.Signal)
-		signal.Notify(sc,
-			syscall.SIGHUP, // 终端线挂断
-			syscall.SIGINT, // 键盘中断
-			//syscall.SIGKILL, // kill信号无法捕捉
-			syscall.SIGTERM, // 软件终止
-		)
-		select {
-		case s := <-sc:
-			log.Printf("OnCloseSignal: %s\n", s)
-		}
-		signal.Stop(sc)
-		close(sc)
-
-		onClose := func() {
-			defer func() {
-				if err := recover(); err != nil {
-					log.Printf("****** doWhenClose paniced:%v ******", err)
-				}
-			}()
-			doWhenClose()
-		}
-
-		onClose()
-
-		log.Println("OnProcessExit complete!")
-
-		close(done)
-		os.Exit(1)
-	}()
-	return done
-}
 
 func InCollection(elem interface{}, coll []interface{}) bool {
 	for _, e := range coll {
@@ -116,26 +65,6 @@ func If(condition bool, then func(), _else ...func()) {
 	}
 }
 
-type SvcWithClose interface {
-	Close() error
-}
-
-func CloseSvcSafely(manySvc []SvcWithClose) []error {
-	var (
-		errs []error
-		err  error
-	)
-	for _, s := range manySvc {
-		if reflect.ValueOf(s).IsNil() {
-			continue
-		}
-		if err = s.Close(); err != nil {
-			errs = append(errs, err)
-		}
-	}
-	return errs
-}
-
 func RandInt(min, max int) int {
 	if min >= max || min == 0 || max == 0 {
 		return max
@@ -145,13 +74,18 @@ func RandInt(min, max int) int {
 }
 
 var shanghai, _ = time.LoadLocation("Asia/Shanghai")
-var simpleLayout = "2006-01-02 15:04:05"
+
+const (
+	TimeLayoutSec = "2006-01-02 15:04:05"
+	TimeLayoutDay = "2006-01-02"
+)
 
 func LoadShanghaiTimeFromStr(s string) (time.Time, error) {
-	return time.ParseInLocation(simpleLayout, s, shanghai)
+	return time.ParseInLocation(TimeLayoutSec, s, shanghai)
 }
 
-func ShortUrl(oldUrl string) (string, error) {
+// TODO: complete this method
+func shortUrl(oldUrl string) (string, error) {
 	servUrl := "https://sina.lt/api.php?from=w&url=%s&site=dwz.date"
 	type rsp struct {
 		Result string
@@ -217,4 +151,11 @@ func GetRunningFuncName(split ...string) string {
 		return fs[len(fs)-1]
 	}
 	return fn
+}
+
+// skip=1 为调用者位置，skip=2为调用者往上一层的位置，以此类推
+// return-example: /develop/go/test_go/tmp_test.go:88
+func FileWithLineNum(skip int) string {
+	_, file, line, _ := runtime.Caller(skip)
+	return fmt.Sprintf("%v:%v", file, line)
 }

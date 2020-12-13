@@ -157,7 +157,7 @@ func NewLoader(fileTyp string) ConfLoader {
 	switch lower {
 	case "json":
 		return &JsonLoader{}
-	case "yaml":
+	case "yaml", "yml":
 		return &YamlLoader{}
 	case "toml":
 		return &TomlLoader{}
