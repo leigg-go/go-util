@@ -12,7 +12,7 @@ func GetEachDayZeroClockFromStToEt(st, et time.Time) []time.Time {
 		return ret
 	}
 
-	sameDay := st.Year() == et.Year() && st.Month() == et.Month() && st.Day() == et.Day()
+	sameDay := st.Format(TimeLayoutDay) == et.Format(TimeLayoutDay)
 	if sameDay {
 		ret = append(ret, time.Date(st.Year(), st.Month(), st.Day(), 0, 0, 0, 0, st.Location()))
 		return ret
@@ -45,4 +45,15 @@ func GetMonthList(startTime, endTime time.Time) []time.Time {
 		startTime = NextMonthFirstDay(startTime)
 	}
 	return ret
+}
+
+// 获取某天的00:00:00，23:59:59
+func GetDayStartEnd(ti ...time.Time) (time.Time, time.Time) {
+	_ti := time.Now()
+	if len(ti) > 0 {
+		_ti = ti[0]
+	}
+	start := time.Date(_ti.Year(), _ti.Month(), _ti.Day(), 0, 0, 0, 0, _ti.Location())
+	end := time.Date(_ti.Year(), _ti.Month(), _ti.Day(), 23, 59, 59, 0, _ti.Location())
+	return start, end
 }
